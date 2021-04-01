@@ -30,7 +30,7 @@ namespace backend.Services
 
         public void SetKey(byte[] key)
         {
-            throw new System.NotImplementedException();
+            crypto.Key = key;
         }
     }
 }

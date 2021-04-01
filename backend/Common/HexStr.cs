@@ -7,7 +7,7 @@ namespace backend.Common
     {
         public static byte[] ToBytes(string input)
         {
-            var input_sanitized = input.Where(c => "0123456789ABCDEFabcdef".Contains(c)).ToArray().ToString();
+            var input_sanitized = new string(input.Where(c => "0123456789ABCDEFabcdef".Contains(c)).ToArray());
             var bytes = new byte[input_sanitized.Length / 2];
             for (int i = 0; i < bytes.Length; i += 2)
             {

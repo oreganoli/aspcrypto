@@ -1,5 +1,6 @@
 using System;
 using Microsoft.AspNetCore.Mvc;
+using backend.Common;
 using backend.Interfaces;
 namespace backend.Controllers
 {
@@ -20,6 +21,14 @@ namespace backend.Controllers
             Response.ContentType = JSON_HEADER;
             var key = symmetricService.GetKey();
             return new JsonResult(key);
+        }
+        [HttpPost]
+        [Route("key")]
+        public IActionResult SetKey([FromBody] string key)
+        {
+            var keyBytes = HexStr.ToBytes(key);
+            symmetricService.SetKey(keyBytes);
+            return new NoContentResult();
         }
     }
 }
