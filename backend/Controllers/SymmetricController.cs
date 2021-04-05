@@ -1,4 +1,6 @@
 using System;
+using System.Security.Cryptography;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using backend.Common;
 using backend.Interfaces;
@@ -27,7 +29,21 @@ namespace backend.Controllers
         public IActionResult SetKey([FromBody] string key)
         {
             var keyBytes = HexStr.ToBytes(key);
-            symmetricService.SetKey(keyBytes);
+            try
+            {
+                symmetricService.SetKey(keyBytes);
+            }
+            catch (CryptographicException ex)
+            {
+                var error_desc = new
+                {
+                    ErrorCode = StatusCodes.Status422UnprocessableEntity,
+                    Message = ex.Message
+                };
+                var result = new JsonResult(error_desc);
+                result.StatusCode = error_desc.ErrorCode;
+                return result;
+            }
             return new NoContentResult();
         }
     }
