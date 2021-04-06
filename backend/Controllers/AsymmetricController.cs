@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 
 using backend.Interfaces;
 using backend.Models;
+using Microsoft.AspNetCore.Http;
 
 namespace backend.Controllers
 {
@@ -30,6 +31,16 @@ namespace backend.Controllers
         public KeyPair GetKeyPairSsh()
         {
             return crypto.GetKeysFile();
+        }
+        /// <summary>Set the current key pair.</summary>
+        /// <param name="pair">Key pair in hex string format, like the one obtained from GETting <c>/key</c>.</param>
+        [HttpPost]
+        [ProducesResponseType(StatusCodes.Status204NoContent)]
+        [Route("key")]
+        public IActionResult SetKeyPair(KeyPair pair)
+        {
+            crypto.SetKeys(pair);
+            return NoContent();
         }
         /// <summary>Sign a message with the current key.</summary>
         /// <remarks>
