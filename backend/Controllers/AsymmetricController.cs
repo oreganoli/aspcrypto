@@ -63,6 +63,15 @@ namespace backend.Controllers
         }
         /// <summary>Encrypts the message given.</summary>
         /// <returns>Ciphertext.</returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST /encode "Super secret bomb schematics go here"
+        ///
+        /// Sample response:
+        ///
+        ///     SM9mxHtEbEqgkk6ri71DaaaLS8ApXAVm/6FgJUFw2gz/IFnMnidEuFy3iveglIcPzVISMNnlNnh5FboUL7b1qc9T6vZ66yEaQllTvDTgVVZeiqXbljwddUeZSaPUphdhmPK5Er+8ojUJLMbqFLdH4MjC4XsFn8ytmcl3ElkIyLg=
+        /// </remarks>
         [HttpPost]
         [Route("encode")]
         public string Encode([FromBody] string message)
@@ -71,6 +80,15 @@ namespace backend.Controllers
         }
         /// <summary>Decrypts the ciphertext given.</summary>
         /// <returns>Plaintext.</returns>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST /decode "SM9mxHtEbEqgkk6ri71DaaaLS8ApXAVm/6FgJUFw2gz/IFnMnidEuFy3iveglIcPzVISMNnlNnh5FboUL7b1qc9T6vZ66yEaQllTvDTgVVZeiqXbljwddUeZSaPUphdhmPK5Er+8ojUJLMbqFLdH4MjC4XsFn8ytmcl3ElkIyLg="
+        ///
+        /// Sample response:
+        ///
+        ///     Super secret bomb schematics go here
+        /// </remarks>
         [HttpPost]
         [Route("decode")]
         public string Decode([FromBody] string message)
