@@ -31,5 +31,35 @@ namespace backend.Controllers
         {
             return crypto.GetKeysFile();
         }
+        /// <summary>Sign a message with the current key.</summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /sign "It is I, LeClerc!"
+        /// Sample response:
+        ///     
+        ///     KWzH1JzOKxgpPFtLW0U1YcgFqoEdMy/RLXoH8hGArQhf3zdeAOSc89o8kcv59eQ4SghPiM1ga5ydvoQPYpewTUCDMEXJDQ2f4bH4lZLxDk9L0I4XruWb2kPwOWORKnuMDVAzOniju3flTOtSg6iZYjVumuiEAaQtgpvKknFHUSs=
+        /// </remarks>
+        [HttpPost]
+        [Route("sign")]
+        public string Sign([FromBody] string message)
+        {
+            return crypto.Sign(message);
+        }
+        /// <summary>Verify the given message and signature.</summary>
+        /// <remarks>
+        /// Sample request:
+        ///
+        ///     POST /verify {"message": "It is I, LeClerc!", "signature": "KWz(...)"}
+        /// Sample response:
+        ///
+        ///     true
+        /// </remarks>
+        [HttpPost]
+        [Route("verify")]
+        public bool Verify([FromBody] SignatureClaim claim)
+        {
+            return crypto.Verify(claim.Message, claim.Signature);
+        }
     }
 }
