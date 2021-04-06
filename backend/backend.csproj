@@ -3,6 +3,7 @@
   <PropertyGroup>
     <TargetFramework>net5.0</TargetFramework>
     <ScopedCssEnabled>false</ScopedCssEnabled> <!--This is a workaround to make OmniSharp work; the current version will otherwise crash when trying to index the Razor libraries of ASP.NET and thus fail to load any ASP.NET project.-->
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
   </PropertyGroup>
 
   <ItemGroup>
