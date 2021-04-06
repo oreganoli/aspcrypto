@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using backend.Interfaces;
 using backend.Models;
 using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations;
 
 namespace backend.Controllers
 {
@@ -37,7 +38,7 @@ namespace backend.Controllers
         [HttpPost]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [Route("key")]
-        public IActionResult SetKeyPair(KeyPair pair)
+        public IActionResult SetKeyPair([FromBody, Required] KeyPair pair)
         {
             crypto.SetKeys(pair);
             return NoContent();
@@ -53,7 +54,7 @@ namespace backend.Controllers
         /// </remarks>
         [HttpPost]
         [Route("sign")]
-        public string Sign([FromBody] string message)
+        public string Sign([FromBody, Required] string message)
         {
             return crypto.Sign(message);
         }
@@ -68,7 +69,7 @@ namespace backend.Controllers
         /// </remarks>
         [HttpPost]
         [Route("verify")]
-        public bool Verify([FromBody] SignatureClaim claim)
+        public bool Verify([FromBody, Required] SignatureClaim claim)
         {
             return crypto.Verify(claim.Message, claim.Signature);
         }
@@ -85,7 +86,7 @@ namespace backend.Controllers
         /// </remarks>
         [HttpPost]
         [Route("encode")]
-        public string Encode([FromBody] string message)
+        public string Encode([FromBody, Required] string message)
         {
             return crypto.Encode(message);
         }
@@ -102,7 +103,7 @@ namespace backend.Controllers
         /// </remarks>
         [HttpPost]
         [Route("decode")]
-        public string Decode([FromBody] string message)
+        public string Decode([FromBody, Required] string message)
         {
             return crypto.Decode(message);
         }

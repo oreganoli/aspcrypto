@@ -4,6 +4,8 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using backend.Common;
 using backend.Interfaces;
+using System.ComponentModel.DataAnnotations;
+
 namespace backend.Controllers
 {
     /// <summary>Symmetric encryption API controller.</summary>
@@ -42,7 +44,7 @@ namespace backend.Controllers
         [Route("key")]
         [ProducesResponseType(StatusCodes.Status204NoContent)]
         [ProducesResponseType(StatusCodes.Status422UnprocessableEntity)]
-        public IActionResult SetKey([FromBody] string key)
+        public IActionResult SetKey([FromBody, Required] string key)
         {
             var keyBytes = HexStr.ToBytes(key);
             try
@@ -78,7 +80,7 @@ namespace backend.Controllers
         /// <response code="500">Internal error</response>
         [HttpPost]
         [Route("encode")]
-        public IActionResult Encode([FromBody] string msg)
+        public IActionResult Encode([FromBody, Required] string msg)
         {
             try
             {
@@ -113,7 +115,7 @@ namespace backend.Controllers
         /// <response code="500">Internal error</response>
         [HttpPost]
         [Route("decode")]
-        public IActionResult Decode([FromBody] string msg)
+        public IActionResult Decode([FromBody, Required] string msg)
         {
             try
             {

@@ -1,4 +1,5 @@
 using System;
+using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Mvc;
 namespace backend.Models
 {
@@ -6,8 +7,10 @@ namespace backend.Models
     public struct KeyPair
     {
         /// <summary>Public key.</summary>
+        [Required]
         public string PublicKey { get; }
         /// <summary>Private key.</summary>
+        [Required]
         public string PrivateKey { get; }
 
         /// <summary>Constructor. Self-explanatory.</summary>
