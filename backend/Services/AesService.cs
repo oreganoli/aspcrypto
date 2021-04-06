@@ -3,9 +3,9 @@ using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using backend.Interfaces;
-/// <summary>An implementation of <c>ISymmetricCrypto</c> using the AES algorithm.</summary>
 namespace backend.Services
 {
+    /// <summary>An implementation of <c>ISymmetricCrypto</c> using the AES algorithm.</summary>
     class AesService : ISymmetricCrypto
     {
         Aes crypto;
@@ -15,6 +15,9 @@ namespace backend.Services
             crypto.GenerateKey();
             crypto.GenerateIV();
         }
+        /// <summary>Decodes ciphertext.</summary>
+        /// <param name="msg">Ciphertext encoded as Base64.</param>
+        /// <returns>Plaintext.</returns>
         public string Decode(string msg)
         {
             byte[] inputBytes = Convert.FromBase64String(msg);
@@ -32,7 +35,9 @@ namespace backend.Services
             }
             return output;
         }
-
+        /// <summary>Encodes plaintext.</summary>
+        /// <param name="msg">Plaintext.</param>
+        /// <returns>Ciphertext in Base64 format.</returns>
         public string Encode(string msg)
         {
             byte[] outputBytes;
@@ -50,7 +55,8 @@ namespace backend.Services
             }
             return Convert.ToBase64String(outputBytes);
         }
-
+        /// <summary>Generates a new symmetric encryption key.</summary>
+        /// <returns>The generated key.</returns>
         public string GetKey()
         {
             crypto.GenerateKey();
@@ -58,7 +64,7 @@ namespace backend.Services
             var keyBytes = crypto.Key;
             return BitConverter.ToString(keyBytes); // Convert to hex string
         }
-
+        /// <summary>Sets the symmetric encryption key.</summary>
         public void SetKey(byte[] key)
         {
             crypto.Key = key;
