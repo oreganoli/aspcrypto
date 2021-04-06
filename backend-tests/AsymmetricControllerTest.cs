@@ -1,6 +1,7 @@
 using System;
 using Xunit;
 using backend.Controllers;
+using backend.Models;
 using backend.Services;
 
 namespace backend_tests
@@ -43,6 +44,18 @@ namespace backend_tests
             Assert.DoesNotContain("assassination", encoded);
             var decoded = ctr.Decode(encoded);
             Assert.Equal(message, decoded);
+        }
+        /// <summary>Signing and verification test.</summary>
+        [Fact]
+        public void SignVerifyTest()
+        {
+            var ctr = fixture.controller;
+            var message1 = "It is I, LeClerc!";
+            var message2 = "Listen very carefully, I shall say this only once!";
+            var signature1 = ctr.Sign(message1);
+            Assert.True(ctr.Verify(new SignatureClaim(message1, signature1)));
+            Assert.False(ctr.Verify(new SignatureClaim(message2, signature1)));
+            // LeClerc can't impersonate anyone
         }
     }
 }
