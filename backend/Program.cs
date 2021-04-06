@@ -9,7 +9,7 @@ using Microsoft.Extensions.Logging;
 
 namespace backend
 {
-    public class Program
+    class Program
     {
         public static void Main(string[] args)
         {

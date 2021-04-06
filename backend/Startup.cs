@@ -18,7 +18,7 @@ using Microsoft.OpenApi.Models;
 
 namespace backend
 {
-    public class Startup
+    class Startup
     {
         public Startup(IConfiguration configuration)
         {
