@@ -13,6 +13,8 @@ namespace backend.Controllers
     {
         static readonly string JSON_HEADER = "application/json";
         ISymmetricCrypto symmetricService;
+        /// <summary>Constructor taking a reference to an <c>ISymmetricCrypto</c> instance.</summary>
+        /// <param name="symmetricService">A symmetric cryptography service implementing the <c>ISymmetricCrypto</c> interface.</param>
         public SymmetricController(ISymmetricCrypto symmetricService)
         {
             this.symmetricService = symmetricService;
@@ -60,6 +62,20 @@ namespace backend.Controllers
             }
             return new NoContentResult();
         }
+        /// <summary>Encodes plaintext given as a JSON string, returning a Base64 representation of the ciphertext.</summary>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST /symmetric/encode/ "Tomorrow we detonate the bombs"
+        ///
+        /// Sample response:
+        ///
+        ///     "efUPUviqVTP3Ja4UjqYrR9PSpm7Zik6BnNjsvp7TNcY="
+        ///
+        /// </remarks>
+        /// <returns>Base64 string representing the encoded plaintext.</returns>
+        /// <response code="200">Success</response>
+        /// <response code="500">Internal error</response>
         [HttpPost]
         [Route("encode")]
         public IActionResult Encode([FromBody] string msg)
@@ -81,6 +97,20 @@ namespace backend.Controllers
                 return result;
             }
         }
+        /// <summary>Decodes Base64 ciphertext given as a JSON string, returning the decrypted plaintext.</summary>
+        /// <remarks>
+        /// Sample request:
+        /// 
+        ///     POST /symmetric/encode/ "efUPUviqVTP3Ja4UjqYrR9PSpm7Zik6BnNjsvp7TNcY="
+        ///
+        /// Sample response:
+        ///
+        ///     "Tomorrow we detonate the bombs"
+        ///
+        /// </remarks>
+        /// <returns>Decrypted plaintext.</returns>
+        /// <response code="200">Success</response>
+        /// <response code="500">Internal error</response>
         [HttpPost]
         [Route("decode")]
         public IActionResult Decode([FromBody] string msg)
