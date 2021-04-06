@@ -2,12 +2,12 @@ using System;
 using Microsoft.AspNetCore.Mvc;
 namespace backend.Models
 {
-    /// <summary>Struct representing an asymmetric key pair.</summary>
+    /// <summary>Struct representing an asymmetric key pair in hex string or OpenSSH-compatible PEM form.</summary>
     public struct KeyPair
     {
-        /// <summary>Public key as a hex string.</summary>
+        /// <summary>Public key.</summary>
         public string PublicKey { get; }
-        /// <summary>Private key as a hex string.</summary>
+        /// <summary>Private key.</summary>
         public string PrivateKey { get; }
 
         /// <summary>Constructor. Self-explanatory.</summary>

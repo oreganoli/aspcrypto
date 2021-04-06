@@ -24,5 +24,12 @@ namespace backend.Controllers
         {
             return crypto.GetKeys();
         }
+        /// <summary>Get the current key pair in an OpenSSH-compatible format.</summary>
+        [HttpGet]
+        [Route("key/ssh")]
+        public KeyPair GetKeyPairSsh()
+        {
+            return crypto.GetKeysFile();
+        }
     }
 }

@@ -8,7 +8,7 @@ namespace backend.Interfaces
         /// <summary>Generate a new key pair and set it as the current one, returning it as a <c>KeyPair</c> of hex strings.</summary>
         public KeyPair GetKeys();
         /// <summary>Returns the key pair in a standardized plaintext format.</summary>
-        public string GetKeysFile();
+        public KeyPair GetKeysFile();
         /// <summary>Sets the keys on the server.</summary>
         public void SetKeys(KeyPair pair);
         /// <summary>Verifies whether or not the message given produces the signature given with the keys currently in use.</summary>

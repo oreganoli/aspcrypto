@@ -1,9 +1,12 @@
 using System;
+using System.IO;
 using System.Security.Cryptography;
 using System.Text;
 using backend.Common;
 using backend.Interfaces;
 using backend.Models;
+using PemUtils;
+
 
 namespace backend.Services
 {
@@ -33,9 +36,25 @@ namespace backend.Services
             return new KeyPair(BitConverter.ToString(rsa.ExportRSAPublicKey()), BitConverter.ToString(rsa.ExportRSAPrivateKey()));
         }
 
-        public string GetKeysFile()
+        public KeyPair GetKeysFile()
         {
-            throw new NotImplementedException();
+            byte[] privateKeyBytes;
+            byte[] publicKeyBytes;
+            using (var privMemStream = new MemoryStream())
+            using (var writer = new PemWriter(privMemStream))
+            {
+                writer.WritePrivateKey(rsa);
+                privateKeyBytes = privMemStream.ToArray();
+            }
+            using (var pubMemStream = new MemoryStream())
+            using (var writer = new PemWriter(pubMemStream))
+            {
+                writer.WritePublicKey(rsa);
+                publicKeyBytes = pubMemStream.ToArray();
+            }
+            string privateKey = Encoding.UTF8.GetString(privateKeyBytes);
+            string publicKey = Encoding.UTF8.GetString(publicKeyBytes);
+            return new KeyPair(publicKey, privateKey);
         }
 
         public void SetKeys(KeyPair pair)
