@@ -1,5 +1,3 @@
-using System;
-using System.Text.Json;
 using Xunit;
 using backend.Controllers;
 using backend.Services;
@@ -8,18 +6,13 @@ using Microsoft.AspNetCore.Http;
 
 namespace backend_tests
 {
-    public class SymmetricControllerFixture : IDisposable
+    public class SymmetricControllerFixture
     {
         public SymmetricController controller;
         public int num = 2;
         public SymmetricControllerFixture()
         {
             controller = new SymmetricController(new AesService());
-        }
-
-        public void Dispose()
-        {
-            return;
         }
     }
     public class SymmetricControllerTest : IClassFixture<SymmetricControllerFixture>
