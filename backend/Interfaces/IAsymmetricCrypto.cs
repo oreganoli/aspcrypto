@@ -10,7 +10,7 @@ namespace backend.Interfaces
         /// <summary>Returns the key pair in a standardized plaintext format.</summary>
         public string GetKeysFile();
         /// <summary>Sets the keys on the server.</summary>
-        public string SetKeys(KeyPair pair);
+        public void SetKeys(KeyPair pair);
         /// <summary>Verifies whether or not the message given produces the signature given with the keys currently in use.</summary>
         public bool Verify(string message, string signature);
         /// <summary>Produces a signature for the given message.</summary>

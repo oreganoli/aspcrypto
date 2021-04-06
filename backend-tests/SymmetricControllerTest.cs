@@ -66,7 +66,7 @@ namespace backend_tests
             var encoded = (JsonResult)ctr.Encode(message);
             var ciphertext = encoded.Value.ToString();
             Assert.NotEqual(message, ciphertext);
-            Assert.False(ciphertext.Contains("assassination"));
+            Assert.DoesNotContain("assassination", ciphertext);
             var decoded = (JsonResult)ctr.Decode(ciphertext);
             var plaintext = decoded.Value.ToString();
             Assert.Equal(message, plaintext);
