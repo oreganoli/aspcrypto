@@ -22,6 +22,14 @@ namespace backend_tests
         {
             this.fixture = fixture;
         }
+        /// <summary>Sanity check for key getting and setting - the hex string format should be compatible with both.</summary>
+        [Fact]
+        public void KeySetGet()
+        {
+            var ctr = fixture.controller;
+            var pair = ctr.GetKeyPair();
+            ctr.SetKeyPair(pair);
+        }
 
         /// <summary>Sanity check for encryption and decryption.</summary>
         [Fact]

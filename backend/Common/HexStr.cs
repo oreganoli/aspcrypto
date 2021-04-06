@@ -11,13 +11,8 @@ namespace backend.Common
         /// <returns>Byte array corresponding to the hex string</returns>
         public static byte[] ToBytes(string input)
         {
-            var input_sanitized = new string(input.Where(c => "0123456789ABCDEFabcdef".Contains(c)).ToArray());
-            var bytes = new byte[input_sanitized.Length / 2];
-            for (int i = 0; i < bytes.Length; i += 2)
-            {
-                bytes[i / 2] = Convert.ToByte(input_sanitized.Substring(i, 2), 16);
-            }
-            return bytes;
+            var input_sanitized = new string(input.Where(c => "0123456789ABCDEFabcdef".Contains(c)).ToArray()).ToUpperInvariant();
+            return Convert.FromHexString(input_sanitized);
         }
     }
 }
