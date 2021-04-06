@@ -101,7 +101,7 @@ namespace backend.Controllers
         /// <remarks>
         /// Sample request:
         /// 
-        ///     POST /symmetric/encode/ "efUPUviqVTP3Ja4UjqYrR9PSpm7Zik6BnNjsvp7TNcY="
+        ///     POST /symmetric/decode/ "efUPUviqVTP3Ja4UjqYrR9PSpm7Zik6BnNjsvp7TNcY="
         ///
         /// Sample response:
         ///
