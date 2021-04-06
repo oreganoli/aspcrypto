@@ -32,6 +32,7 @@ namespace backend
         {
 
             services.AddControllers();
+            services.AddSingleton<IAsymmetricCrypto, RsaService>();
             services.AddSingleton<ISymmetricCrypto, AesService>();
             services.AddSwaggerGen(c =>
             {
