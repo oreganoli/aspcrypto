@@ -6,9 +6,10 @@ using backend.Interfaces;
 namespace backend.Services
 {
     /// <summary>An implementation of <c>ISymmetricCrypto</c> using the AES algorithm.</summary>
-    class AesService : ISymmetricCrypto
+    public class AesService : ISymmetricCrypto
     {
         Aes crypto;
+        /// <summary>Constructor.</summary>
         public AesService()
         {
             crypto = Aes.Create();
