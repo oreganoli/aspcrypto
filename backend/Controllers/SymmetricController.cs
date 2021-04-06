@@ -11,7 +11,6 @@ namespace backend.Controllers
     [Route("[controller]")]
     public class SymmetricController : ControllerBase
     {
-        static readonly string JSON_HEADER = "application/json";
         ISymmetricCrypto symmetricService;
         /// <summary>Constructor taking a reference to an <c>ISymmetricCrypto</c> instance.</summary>
         /// <param name="symmetricService">A symmetric cryptography service implementing the <c>ISymmetricCrypto</c> interface.</param>
