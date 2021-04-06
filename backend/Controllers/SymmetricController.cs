@@ -23,11 +23,12 @@ namespace backend.Controllers
         /// <returns>New key as a JSON string</returns>
         [HttpGet]
         [Route("key")]
-        public IActionResult GetKey()
+        public JsonResult GetKey()
         {
-            Response.ContentType = JSON_HEADER;
             var key = symmetricService.GetKey();
-            return new JsonResult(key);
+            var result = new JsonResult(key);
+            result.StatusCode = StatusCodes.Status200OK;
+            return result;
         }
         /// <summary>Sets the symmetric key to the one provided as a JSON string in the body.</summary>
         /// <remarks>
