@@ -46,5 +46,47 @@ namespace backend.Controllers
             }
             return new NoContentResult();
         }
+        [HttpPost]
+        [Route("encode")]
+        public IActionResult Encode([FromBody] string msg)
+        {
+            try
+            {
+                var encoded = symmetricService.Encode(msg);
+                return new JsonResult(encoded);
+            }
+            catch (Exception e)
+            {
+                var error_desc = new
+                {
+                    ErrorCode = StatusCodes.Status500InternalServerError,
+                    Message = e.Message
+                };
+                var result = new JsonResult(error_desc);
+                result.StatusCode = error_desc.ErrorCode;
+                return result;
+            }
+        }
+        [HttpPost]
+        [Route("decode")]
+        public IActionResult Decode([FromBody] string msg)
+        {
+            try
+            {
+                var decoded = symmetricService.Decode(msg);
+                return new JsonResult(decoded);
+            }
+            catch (Exception e)
+            {
+                var error_desc = new
+                {
+                    ErrorCode = StatusCodes.Status500InternalServerError,
+                    Message = e.Message
+                };
+                var result = new JsonResult(error_desc);
+                result.StatusCode = error_desc.ErrorCode;
+                return result;
+            }
+        }
     }
 }
