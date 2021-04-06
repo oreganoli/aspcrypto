@@ -61,5 +61,21 @@ namespace backend.Controllers
         {
             return crypto.Verify(claim.Message, claim.Signature);
         }
+        /// <summary>Encrypts the message given.</summary>
+        /// <returns>Ciphertext.</returns>
+        [HttpPost]
+        [Route("encode")]
+        public string Encode([FromBody] string message)
+        {
+            return crypto.Encode(message);
+        }
+        /// <summary>Decrypts the ciphertext given.</summary>
+        /// <returns>Plaintext.</returns>
+        [HttpPost]
+        [Route("decode")]
+        public string Decode([FromBody] string message)
+        {
+            return crypto.Decode(message);
+        }
     }
 }

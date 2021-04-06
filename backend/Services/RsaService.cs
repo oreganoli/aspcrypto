@@ -20,14 +20,14 @@ namespace backend.Services
         public string Decode(string message)
         {
             var inputBytes = Convert.FromBase64String(message);
-            var outputBytes = rsa.DecryptValue(inputBytes);
+            var outputBytes = rsa.Decrypt(inputBytes, true);
             return Encoding.UTF8.GetString(outputBytes);
         }
 
         public string Encode(string message)
         {
             var inputBytes = Encoding.UTF8.GetBytes(message);
-            var outputBytes = rsa.EncryptValue(inputBytes);
+            var outputBytes = rsa.Encrypt(inputBytes, true);
             return Convert.ToBase64String(outputBytes);
         }
 
