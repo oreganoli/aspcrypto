@@ -40,8 +40,8 @@ namespace backend.Services
 
         public void SetKeys(KeyPair pair)
         {
-            rsa.ImportRSAPrivateKey(HexStr.ToBytes(pair.privateKey), out var dummyPriv);
-            rsa.ImportRSAPublicKey(HexStr.ToBytes(pair.publicKey), out var dummyPub);
+            rsa.ImportRSAPrivateKey(HexStr.ToBytes(pair.PrivateKey), out var dummyPriv);
+            rsa.ImportRSAPublicKey(HexStr.ToBytes(pair.PublicKey), out var dummyPub);
         }
 
         public string Sign(string message)
